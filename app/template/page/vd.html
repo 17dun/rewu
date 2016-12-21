@@ -1,0 +1,113 @@
+<div class="content-wrap">
+    <form id="queryBox" class="form-inline">
+        <div class="form-group">
+            <label for="foodNameQ">标题</label>
+            <input type="text" class="form-control" id="foodNameQ" name="foodNameQ">
+        </div>
+        <div class="form-group">
+            <label for="foodHotQ">类型</label>
+           <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
+        </div>
+        <div class="form-group">
+            <label for="foodHotQ">来源</label>
+            <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
+        </div>
+        <button type="button" class="btn btn-primary query-btn">查询</button>
+        <button type="button" class="btn btn-primary add-btn">新建</button>
+        <button type="button" class="btn btn-primary delall-btn">批量删除</button>
+        <button type="button" class="btn btn-primary import-btn">导入</button>
+    </form>
+     <table class="table table-bordered table-striped task-table" id="listBox">
+        <thead>
+            <tr>
+                <th width="5%"><input type="checkbox" value="1"  class="all-check" /></th>
+                <th width="30%">标题</th>
+                <th width="20%">缩略图</th>
+                <th>播放次数</th>
+                <th>时长</th>
+                <th>tip</th>
+                <th>VID</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="listBody">
+        </tbody>
+    </table>
+
+    <div id="editBox" style="display:none;">
+
+    </div>
+
+    <div id="delBox" style="display:none;">
+        删除无法恢复，确定要删除？
+    </div>
+
+    <div id="importBox" class="container-fluid" style="display: none">
+        <div class="row">
+            <form id="editform" role="form">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="jsonObj">json</label>
+                        <textarea class="form-control" id="jsonObj" name="jsonObj"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p class="alert alert-success" id="bgMsg" style="opacity:0">操作成功!</p>
+</div>
+
+<script id="editFormTemp" type="text/x-jquery-tmpl">
+    <div class="container-fluid">
+    <div class="row">
+    <form id="editform" role="form">
+       {{if _id}}
+            <input type="hidden" name="_id" value=${_id} />
+       {{/if}}
+      <div class="col-xs-12">
+        <div class="form-group">
+        <label for="foodName">标题</label>
+              <input type="text" class="form-control" id="foodName" name="foodName" value="${foodName}">
+        </div>
+        <div class="form-group">
+        <label for="foodHot">缩略图</label>
+              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        </div>
+         <div class="form-group">
+        <label for="foodHot">类型</label>
+              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        </div>
+         <div class="form-group">
+        <label for="foodHot">标签</label>
+              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        </div>
+         <div class="form-group">
+        <label for="foodHot">优酷ID</label>
+              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        </div>
+      </div>
+    </form>
+    </div>
+    </div>
+</script>
+
+<script id="listTemp" type="text/x-jquery-tmpl">
+    <tr data-itemid="${_id}" data-itemname="${foodName}">
+        <td width="5%"><input class="item-check" type="checkbox"/></td>
+        <td width="10%"><a target="_blank" href="/vd/play?vid=${vid}">${name}</a></td>
+        <td width="15%"><a target="_blank" href="/vd/play?vid=${vid}"><img style="width:100px;height:100px" src='${img}'></a></td>
+        <td>${num}</td>
+        <td>${time}</td>
+        <td>${target}</td>
+        <td>${vid}</td>
+        <td>
+            <a href="javascript:;" type="button" class="edit-btn">编辑</a>
+            <a href="javascript:;" type="button" class="del-btn">删除</a>
+        </td>
+    </tr>
+</script>
+
+
+
