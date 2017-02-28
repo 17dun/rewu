@@ -113,7 +113,6 @@ exports = module.exports = function (app, settings) {
     };
     merge(context, this.state);
     merge(context, _context);
-    console.log(context);
     var html = yield *render(settings.pagedir+'/'+view, context);
 
     var layout = context.layout === false ? false : (context.layout || settings.layout);

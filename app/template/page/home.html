@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             <label for="foodHotQ">类型</label>
-           <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
+            <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
         </div>
         <div class="form-group">
             <label for="foodHotQ">来源</label>
@@ -17,19 +17,19 @@
         <button type="button" class="btn btn-primary delall-btn">批量删除</button>
         <button type="button" class="btn btn-primary import-btn">导入</button>
     </form>
-     <table class="table table-bordered table-striped task-table" id="listBox">
+    <table class="table table-bordered table-striped task-table" id="listBox">
         <thead>
-            <tr>
-                <th width="5%"><input type="checkbox" value="1"  class="all-check" /></th>
-                <th width="30%">标题</th>
-                <th width="20%">缩略图</th>
-                <th>播放次数</th>
-                <th>时长</th>
-                <th>tip</th>
-                <th>VID</th>
-                <th>贡献者</th>
-                <th>操作</th>
-            </tr>
+        <tr>
+            <th width="5%"><input type="checkbox" value="1"  class="all-check" /></th>
+            <th width="30%">标题</th>
+            <th width="20%">缩略图</th>
+            <th>播放次数</th>
+            <th>时长</th>
+            <th>tip</th>
+            <th>VID</th>
+            <th>贡献者</th>
+            <th>操作</th>
+        </tr>
         </thead>
         <tbody id="listBody">
         </tbody>
@@ -97,8 +97,8 @@
 <script id="listTemp" type="text/x-jquery-tmpl">
     <tr data-itemid="${_id}" data-itemname="${foodName}">
         <td width="5%"><input class="item-check" type="checkbox"/></td>
-        <td width="10%"><a target="_blank" href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}">${name}</a></td>
-        <td width="15%"><a target="_blank" href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}"><img style="width:100px;height:100px" src='${img}'></a></td>
+        <td width="10%"><a target="_blank" href="/vd/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}">${name}</a></td>
+        <td width="15%"><a target="_blank" href="/vd/play?vid=${vid}"><img style="width:100px;height:100px" src='${img}'></a></td>
         <td>${num}</td>
         <td>${time}</td>
         <td>${target}</td>

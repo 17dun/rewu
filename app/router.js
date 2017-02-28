@@ -28,15 +28,24 @@ function set(app) {
 }
 
 function setMap(ctrs) {
-    router.get('/', ctrs.vd.show);
-    //食物管理
+
+    //首页
+    router.get('/', ctrs.home.show);
+    router.get('/home', ctrs.home.show);
+    router.get('/home/list', ctrs.home.list);
+
+    //播放页
+    router.get('/play', ctrs.vd.play);
+    router.get('/reList', ctrs.vd.reList);
+
+
+    //后台
     router.get('/vd', ctrs.vd.show);
     router.get('/vd/list', ctrs.vd.list);
     router.get('/vd/save', ctrs.vd.save);
-    //router.post('/vd/saveList', ctrs.vd.saveList);
     router.get('/vd/del', ctrs.vd.del);
     router.post('/vd/delall', ctrs.vd.delall);
-    router.get('/vd/play', ctrs.vd.play);
+
 
 }
 module.exports = set;

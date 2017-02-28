@@ -30,7 +30,7 @@ module.exports = {
     view: {
         root: path.join(__dirname, '../app/template'),
         pagedir: 'page',
-        layout: 'layout',
+        //layout: 'layout',
         viewExt: 'html',
         cache: false,
         debug: true,

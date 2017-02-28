@@ -1,0 +1,27 @@
+<% if(noWrap) {%>
+    <%- body %>
+<% } else { %>
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="UTF-8">
+        <title>91热舞</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <style>
+          body{
+              margin:0;
+          }
+      </style>
+  </head>
+  <body>
+    <div class="wrap">
+        <div class="container-wrap-outer">
+            <%- body %>
+        </div>
+    </div>
+  </body>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/page/<%=pageName%>.js"></script>
+</html>
+<% } %>

@@ -8,9 +8,33 @@ var MongoClient = require('mongodb').MongoClient;
 var DB_CONN_STR = require('../../conf').db;
 var ObjectId =  require('mongodb').ObjectID;
 module.exports = {
+
+    reList: function(data){
+        var user = data.user;
+        return new Promise(function (resovel, reject) {
+            MongoClient.connect(DB_CONN_STR, function(err, db){
+                var collection = db.collection('vds');
+                collection.find({user:user}).limit(10).sort({_id:1}).toArray(function(err, rt){
+                    if(err){
+                        resovel({
+                            code: 1,
+                            msg: '数据库查询失败',
+                            data: err
+                        });
+                    }else{
+                        resovel({
+                            code: 0,
+                            msg: '查询成功',
+                            data: rt
+                        });
+                    }
+                });
+            });
+        });
+    },
     list: function(data){
 
-        var pageSize = data.pageSize*1 || 1000;
+        var pageSize = data.pageSize*1 || 10;
         if(data.pageNum){
             from = (data.pageNum - 1) * data.pageSize;
         }else{

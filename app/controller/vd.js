@@ -5,6 +5,7 @@
  * @date 2017/3/7
  */
 var vdModel = require('../model/vd.js');
+
 module.exports = {
 
     //显示页面
@@ -15,9 +16,21 @@ module.exports = {
 
     play: function *(){
         var data = this.query;
-        yield this.render('play',{
-            vid: data.vid
-        });
+        yield this.xrender('play', {
+            vid: data.vid,
+            num: data.num,
+            target: data.target,
+            user: data.user,
+            time: data.time
+        })
+    },
+
+
+    //推荐列表
+    reList: function *(){
+        var data = this.query;
+        var rs = yield vdModel.reList(data);
+        yield this.api(rs);
     },
 
     //获取列表

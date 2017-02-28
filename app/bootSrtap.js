@@ -16,6 +16,7 @@ var bodyParser = require('koa-bodyparser');
 var tclog = require('./libs/tclog.js');
 var genLogid = require('./libs/logid').genLogid;
 var api = require('./libs/api');
+var ua = require('./libs/ua');
 
 app.keys = ['tiancai', 'xiaoguang'];
 
@@ -30,6 +31,7 @@ app.use(function *(next) {
 // 设置模板
 view(app, config.view);
 
+app.context.xrender = ua.renderByUa;
 // 设置api
 api(app);
 app.use(require('koa-static')(config.statics.staticRoute));
