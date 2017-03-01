@@ -16,9 +16,14 @@ module.exports = {
         }
         var tpl = flag? tpl : 'm'+tpl;
         var layout = flag? 'layout' : 'mlayout';
+        console.log(layout);
         var data = data;
         if(data){
             data.layout = layout;
+        }else{
+            data = {
+                layout: layout
+            }
         }
         yield this.render(tpl,data);
     }

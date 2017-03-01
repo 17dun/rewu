@@ -1,142 +1,423 @@
 <style>
-    .info{
-        padding: 15px 10px;
-        border-bottom: 8px solid #e6e6e6;
-        height: 20px;
-        overflow: hidden;
-        color: #999;
-        font-size: 14px;
-    }
-    .video-num{
-        padding-left: 19px;
-        display: inline-block;
-    }
 
-    .fr{
-        float:right;
-        margin-right: 20px;
-    }
-    .fr span{
-        height: 26px;
-        line-height: 26px;
-        background-position: 0 -34px;
-        padding-left: 25px;
-        position: relative;
-        top: -5px;
-    }
-    .module{
-        position: relative;
-        padding: 15px 0;
-        border-bottom: 1px solid #ebebeb;
-    }
-    .module-name.fl {
-        position: relative;
-        top: 1px;
-    }
-    .module-name {
-        width: 66%;
-        padding-left: 10px;
-        height: 18px;
-        line-height: 18px;
-        font-size: 17px;
-        margin: 1px 0;
-        overflow: hidden;
-    }
-    .clearfix {
-        zoom: 1;
-    }
-    .ov-list{
-        margin: 0;
-        padding: 0;
-    }
-    .ov-list li {
-        height: 70px;
-        padding: 8px 10px 8px 145px;
-        position: relative;
-        border-bottom: 1px solid #ebebeb;
-        list-style: none;
-    }
-
-    .v-link {
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-
-    .ov-list .v {
-        width: 125px;
-        height: 70px;
-        position: absolute;
-        top: 8px;
-        left: 10px;
-        background-size: contain;
-    }
-    .ov-list .v-item{
-        position: relative;
-        top: -13px;
-        left: 0px;
-    }
-    img {
-        border: 0;
-    }
-    .v-duration {
-        padding-top: 20px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 20px;
-        text-align: right;
-    }
-    .v-duration span {
-        padding-right: 5px;
-        color: #fff;
-    }
-    .v-item h2 {
-        font-weight: 400;
-        line-height: 18px;
-    }
-    .v-item h2 span {
-        height: 36px;
-        margin-bottom: 1pc;
-        color: #333;
-        font-size: 14px;
-        word-wrap: break-word;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-    }
-    .v-num{
-        color:#666;
-    }
     body{
         font-size: 12px;
         color: #333;
     }
     a {
         text-decoration: none;
+        color: #555;
+    }
+    a:visited{
+        color: #555;
     }
     a, html * {
         outline: 0;
     }
-    .v-item h2 span {
+
+    .header{
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:30px;
+        padding:10px;
+        background: #f6f6f6;
+        z-index: 999;
+    }
+
+    .logo{
+        float:left;
+        height:25px;
+        line-height:25px;
+        padding-right: 10px;
+    }
+
+    .search{
+        border:1px solid #eee; width:240px;height:25px; float:left;margin-right:10px;
+    }
+
+    .submit{
+        float:left;height: 25px;background: #555;margin-top:2px;
+    }
+
+
+
+    .channel{
+        width: 100%;
+        margin-top:50px;
+        margin-left:-10px;
+    }
+    .channel:after{
+        clear:both;
+        content:"";
+        display: table;
+    }
+    .larger-channel-item{
+        width: 100%;
+        height:200px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        position: relative;
+    }
+    .larger-channel-item img{
+        width:100%;
+        height:auto;
+    }
+
+    .larger-info {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding-left: 30px;
+
+    }
+
+    .larger-info-ov{
+        width: 100%;
+        height: 44px;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding-left: 20px;
+    }
+
+    .larger-info-ov-color{
+        width: 100%;
+        height: 100%;
+        background: #333;
+        opacity: .6;
+    }
+
+    .larger-info-title{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fff;
+        font-size: 18px;
+    }
+
+    .larger-info-des{
+        color: #ddd;
+        height: 20px;
+        line-height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
+        white-space: nowrap;
+    }
+
+    .larger-info a{
+        color:#fff;
+        text-decoration: none;
+        line-height: 24px;
+    }
+
+    .channel-item{
+        width: 50%;
+        position: relative;
+        float: left;
+        padding-left: 20px;
+        margin-top:20px;
+        box-sizing: border-box;
+    }
+
+    .item-img{
+        width:100%;
+        height:auto;
+    }
+
+    .item-info{
+        padding: 5px;
+        background: #f5f5f5;
+    }
+
+    .info-title{
+        height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #555;
+        font-size: 14px;
+    }
+    .info-des{
+        height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 12px;
+        text-overflow: ellipsis;
+        color: #909090;
+    }
+
+    .item-time{
+        position: absolute;
+        color:#fff;
+        right: 5px;
+        bottom: 55px;
+    }
+
+    .item-link{
+        width:100%;
+        height:100%;
+        display: block;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .channel-title{
+        padding-left: 20px;
+        margin: 0;
+        color:#909090;
+        font-size: 26px;
+        height: 35px;
+        line-height: 35px;
     }
 </style>
 <div class="content-wrap">
-
-    <div class="ad">
-
-    </div>
-    <div class="recommend">
-        <div class="module clearfix">
-            <div class="module-name fl">大家都在看</div>
+    <header class="header">
+        <div class="logo">91renwu</div>
+        <input type="text" class="search"/>
+        <button class="submit">搜索</button>
+    </header>
+    <div class="channel">
+        <div class="larger-channel-item">
+            <img src="//r1.ykimg.com/050C000058B68605AD9E07055A0472FA" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="larger-info-ov">
+                <div class="larger-info-ov-color"></div>
+            </div>
+            <div class="larger-info">
+                <div class="larger-info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="larger-info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
         </div>
-        <ul class="ov-list" id="listBody">
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+                </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
 
-        </ul>
     </div>
-
+    <div class="channel">
+        <h2 class="channel-title">热舞</h2>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="channel">
+        <h2 class="channel-title">热舞</h2>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="channel">
+        <h2 class="channel-title">热舞</h2>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+        <div class="channel-item">
+            <img class="item-img" src="//r1.ykimg.com/0515000058B6438DAD9E0705560B6949" alt="">
+            <a class="item-link" href="#"></a>
+            <div class="item-time">21:45</div>
+            <div class="item-info">
+                <div class="info-title">
+                    <a href="//m.youku.com/video/id_XMjUyMTUwNjk0OA==.html?ev=1" data-from="1-2" target="video">&lt;热血长安&gt;神秘礼物藏线索 萨摩佯装中招诱真凶</a>
+                </div>
+                <div class="info-des">
+                    &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">3,365万</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">333</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
