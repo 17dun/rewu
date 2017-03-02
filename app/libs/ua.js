@@ -14,6 +14,9 @@ module.exports = {
         for (var v = 0; v < Agents.length; v++) {
             if (uaStr.indexOf(Agents[v]) > 0) { flag = false; break; }
         }
+
+        //先关闭PC站
+        flag = false
         var tpl = flag? tpl : 'm'+tpl;
         var layout = flag? 'layout' : 'mlayout';
         console.log(layout);

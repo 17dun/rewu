@@ -14,7 +14,8 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find({user:user}).limit(10).sort({_id:1}).toArray(function(err, rt){
+                var start = Math.floor(Math.random()*1000);
+                collection.find().skip(start).limit(20).sort({_id:1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
