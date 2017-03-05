@@ -8,11 +8,11 @@ zeus.page({
         self.setPic();
     },
     bindEvent: function(){
-        $(window).scroll(function(){
-            if($(window).scrollTop() == $(document).height() - $(window).height()){
-                self.getNewList();
-            }
-        });
+        //$(window).scroll(function(){
+        //    if($(window).scrollTop() == $(document).height() - $(window).height()){
+        //        self.getNewList();
+        //    }
+        //});
         $('.submit').on('click',function(){
             var wd = $.trim($('.search').val());
             if(wd==''){

@@ -33,8 +33,32 @@ module.exports = {
             });
         });
     },
-    list: function(data){
 
+
+    getSearchList: function(word){
+        return new Promise(function (resovel, reject) {
+            MongoClient.connect(DB_CONN_STR, function(err, db){
+                var collection = db.collection('vds');
+                collection.find({"name": {$regex:word}}).limit(100).sort({_id:-1}).toArray(function(err, rt){
+                    if(err){
+                        resovel({
+                            code: 1,
+                            msg: '数据库查询失败',
+                            data: err
+                        });
+                    }else{
+                        resovel({
+                            code: 0,
+                            msg: '查询成功',
+                            data: rt
+                        });
+                    }
+                });
+            });
+        });
+    },
+
+    list: function(data){
         var pageSize = data.pageSize*1 || 10;
         if(data.pageNum){
             from = (data.pageNum - 1) * data.pageSize;

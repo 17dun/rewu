@@ -14,6 +14,20 @@ module.exports = {
         
     },
 
+    //显示搜索页
+    showSearch: function *(){
+        var word = this.query.word;
+        if(word){
+            var list = yield vdModel.getSearchList(word);
+        }else{
+            var list = {data:[]};
+        }
+        yield this.xrender('search',{
+            list: list.data,
+            word: word
+        });
+    },
+
     play: function *(){
         var data = this.query;
         yield this.xrender('play', {
@@ -67,4 +81,6 @@ module.exports = {
         var rs = yield vdModel.delall(data);
         yield this.api(rs);
     }
+
+
 };

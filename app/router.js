@@ -38,6 +38,9 @@ function setMap(ctrs) {
     router.get('/play', ctrs.vd.play);
     router.get('/reList', ctrs.vd.reList);
 
+    //搜索页
+    router.get('/search',ctrs.vd.showSearch);
+
 
     //后台
     router.get('/vd', ctrs.vd.show);
