@@ -14,7 +14,9 @@ var minifyCss = require('gulp-minify-css');
 var fecs = require('fecs-gulp');
 var fs = require('fs');
 var opn = require('opn');
-var gulpSequence = require('gulp-sequence')
+var gulpSequence = require('gulp-sequence');
+var spawn = require('child_process').spawnSync;
+
 
 // 监听静态文件和模板以及pid修改，并刷新页面
 gulp.task('watch', function () {
@@ -66,6 +68,15 @@ gulp.task('startTest', function () {
         ]
     });
 });
+
+gulp.task('online',function(){
+    gulp.src('conf/online/index.js')
+        .pipe(gulp.dest('conf'));
+    spawn('pm2',['stop', 'app/bootSrtap.js']);
+    spawn('pm2',['start', 'app/bootSrtap.js']);
+
+});
+
 
 gulp.task('build', function () {
     // 单元测试

@@ -4,6 +4,7 @@
  * @author xiaoguang01
  * @date 2015/9/25
  */
+"use strict";
 var path = require('path');
 module.exports = {
 	// 当前运行模式
@@ -17,7 +18,7 @@ module.exports = {
 
 	statics: {
 		basePath: 'http://127.0.0.1/client/',
-		staticRoute: 'client/build'
+		staticRoute: 'client/src'
 	},
 
 	// 文本宏
@@ -29,10 +30,11 @@ module.exports = {
 	view: {
 		root: path.join(__dirname, '../app/template'),
 		//layout: 'layout',
+        pagedir: 'page',
 		viewExt: 'html',
 		cache: false,
 		debug: true,
-		useLess: false
+		useLess: true
 	},
 
 	// 日志相关配置
@@ -45,18 +47,6 @@ module.exports = {
 		redictConsole: true
 	},
 
-	// 后端连接相关配置
-    thirft: {
-        host: '123.57.227.107',
-        port: 9999,
-        timeout: 3000
-    },
 
-	// redis连接相关配置
-	redis: {
-		host: '182.254.209.32',
-		port: 6379
-	},
-
-    db: 'mongodb://localhost:27017/sousou'
+    db: 'mongodb://localhost:27017/rewu'
 }
