@@ -52,13 +52,14 @@ gulp.task('start', function () {
 });
 
 
-gulp.task('online',function(){
+gulp.task('deploy',function(){
     gulp.src('conf/online/index.js')
         .pipe(gulp.dest('conf'));
     spawn('pm2',['stop', 'app/bootSrtap.js']);
     spawn('pm2',['start', 'app/bootSrtap.js']);
-
 });
+
+
 
 
 gulp.task('build', function () {
@@ -104,11 +105,6 @@ gulp.task('build', function () {
         .pipe(uglify())
         .pipe(gulp.dest('client/build/js/page'))
 
-
-    // 拷贝bower_components
-    gulp.src('client/bower_components/*')
-        .pipe(gulp.dest('client/build/bower_components'));
-
     // //压缩编译cess
     gulp.src(['client/src/css/**/*.css'])
     	.pipe(less())
@@ -130,6 +126,7 @@ gulp.task('build', function () {
     // 拷贝iconfont文件
     gulp.src('client/src/font/*.{ttf,woff,eot,svg}')
         .pipe(gulp.dest('client/build/font'));
+
 });
 
 // livereload
@@ -144,3 +141,11 @@ gulp.task('dev', gulpSequence(
     'watch',
     'open'
 ));
+
+//上线
+gulp.task('online', gulpSequence('build', 'deploy'));
+
+//下线
+gulp.task('offline',function(){
+    spawn('pm2',['stop', 'app/bootSrtap.js']);
+});
