@@ -12,7 +12,6 @@ zeus.page({
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 self.getNewList();
             }
-
         });
         $('.submit').on('click', function () {
             var wd = $.trim($('.search').val());
@@ -42,7 +41,7 @@ zeus.page({
             type: 'GET',
             dataType: 'json',
             success: function (rt) {
-                $('#listTemp').tmpl(rt.data).appendTo('#infiniteList');
+                $('#listTemp').renderAppend(rt.data).appendTo('#infiniteList').show();
                 self.setPic();
             }
         });

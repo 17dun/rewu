@@ -24,7 +24,11 @@
         <% include blocks/footer.html %>
     </div>
   </body>
-    <script type="text/javascript" src="/js/common.js"></script>
+  <% if(evn=='dev') {%>
+    <script type="text/javascript" src="/js/dev.js"></script>
     <script type="text/javascript" src="/js/page/<%=pageName%>.js"></script>
+  <% } else { %>
+    <script type="text/javascript" src="/js/bundle.js"></script>
+  <% } %>
 </html>
 <% } %>

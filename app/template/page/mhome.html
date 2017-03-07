@@ -1,167 +1,4 @@
-<style>
-
-    body{
-        font-size: 12px;
-        color: #333;
-    }
-    a {
-        text-decoration: none;
-        color: #555;
-    }
-    a:visited{
-        color: #555;
-    }
-    a, html * {
-        outline: 0;
-    }
-
-    .channel{
-        width: 100%;
-        margin-top:20px;
-        margin-left:-10px;
-    }
-    .channel:first-of-type{
-        margin-top:50px;
-    }
-    .channel:after{
-        clear:both;
-        content:"";
-        display: table;
-    }
-    .larger-channel-item{
-        width: 100%;
-        height:200px;
-        padding-left: 20px;
-        box-sizing: border-box;
-        position: relative;
-    }
-    .larger-channel-item img{
-        width:100%;
-        height:auto;
-    }
-
-    .larger-info {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 2;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        padding-left: 30px;
-
-    }
-
-    .larger-info-ov{
-        width: 100%;
-        height: 44px;
-        box-sizing: border-box;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        padding-left: 20px;
-    }
-
-    .larger-info-ov-color{
-        width: 100%;
-        height: 100%;
-        background: #333;
-        opacity: .6;
-    }
-
-    .larger-info-title{
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        color: #fff;
-        font-size: 18px;
-    }
-
-    .larger-info-des{
-        color: #ddd;
-        height: 20px;
-        line-height: 20px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .larger-info a{
-        color:#fff;
-        text-decoration: none;
-        line-height: 24px;
-    }
-
-    .channel-item{
-        width: 50%;
-        position: relative;
-        float: left;
-        padding-left: 20px;
-        margin-top:20px;
-        box-sizing: border-box;
-    }
-
-    .item-img{
-        width:100%;
-        height:auto;
-    }
-
-    .item-info{
-        padding: 5px;
-        background: #f5f5f5;
-    }
-
-    .info-title{
-        height: 20px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: #555;
-        font-size: 14px;
-    }
-    .info-des{
-        height: 20px;
-        overflow: hidden;
-        white-space: nowrap;
-        font-size: 12px;
-        text-overflow: ellipsis;
-        color: #909090;
-    }
-
-    .item-time{
-        position: absolute;
-        color:#fff;
-        right: 5px;
-        bottom: 55px;
-    }
-
-    .item-link{
-        width:100%;
-        height:100%;
-        display: block;
-        z-index: 4;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .channel-title{
-        padding-left: 20px;
-        margin: 0;
-        color:#909090;
-        font-size: 26px;
-        height: 35px;
-        line-height: 35px;
-    }
-    .tip{
-        width:100%;
-        height:50px;
-        line-height: 50px;
-        text-align: center;
-    }
-</style>
 <div class="content-wrap">
-
     <div class="channel">
         <% top.forEach(function(item,i){%>
             <% if(i==0){%>
@@ -220,20 +57,20 @@
 </div>
 
 
-<script id="listTemp" type="text/x-jquery-tmpl">
+<div id="listTemp" style="display: none" jt-model="item in list">
     <div class="channel-item">
-        <img class="item-img load-pic" src="/img/default2.png" data-src="${img}" alt="">
-        <a href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}" class="item-link"></a>
-        <div class="item-time">${time}</div>
+        <img class="item-img load-pic" src="/img/default2.png" data-src="{{item.img}}" alt="">
+        <a href="/play?vid={{item.vid}}&num={{item.num}}&time={{item.time}}&target={{item.target}}&user={{item.user}}" class="item-link"></a>
+        <div class="item-time">{{item.time}}</div>
         <div class="item-info">
             <div class="info-title">
-                <a href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}">${name}</a>
+                <a href="/play?vid={{item.vid}}&num={{item.num}}&time={{item.time}}&target={{item.target}}&user={{item.user}}">{{item.name}}</a>
             </div>
             <div class="info-des">
-                &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">${num}次播放</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">${target}</span>
+                &nbsp;<i class="ico-stat-play" title="播放"></i><span class="v-num">{{item.num}}次播放</span>&nbsp;<i title="评论" class="ico-stat-comment"></i><span class="v-num">{{item.target}}</span>
             </div>
         </div>
     </div>
-</script>
+</div>
 
 

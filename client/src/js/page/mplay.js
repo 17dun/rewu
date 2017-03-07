@@ -37,8 +37,7 @@ zeus.page({
     },
 
     renderList: function(){
-        $("#listBody").empty();
-        $('#listTemp').tmpl(self.list).appendTo('#listBody');
+        $('#listTemp').renderAppend(self.list).appendTo('.recommend').show();
     }
 
 

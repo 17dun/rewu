@@ -109,6 +109,7 @@ exports = module.exports = function (app, settings) {
     var context = {
       noWrap: false,
       pageName: view,
+      env: this.env,
       useLess: settings.useLess || false
     };
     merge(context, this.state);

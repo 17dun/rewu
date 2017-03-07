@@ -23,7 +23,7 @@ module.exports = {
 
     // 文本宏
     consts: {
-        siteName: '甜菜金融'
+        siteName: '91热舞'
     },
 
     // 模板引擎相关配置

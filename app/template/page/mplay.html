@@ -124,7 +124,7 @@
         -webkit-box-orient: vertical;
     }
 </style>
-<div class="content-wrap">
+<div class="content-wrap" style="padding:0 10px;">
     <iframe style="height:210px;width:100%;margin-top:50px" src='http://player.youku.com/embed/<%= vid %>' frameborder=0 ></iframe>
     <div class="info">
         <div class="video-num"><%=num%>次播放</div>
@@ -142,28 +142,25 @@
         <div class="module clearfix">
             <div class="module-name fl">大家都在看</div>
         </div>
-        <ul class="ov-list" id="listBody">
-
-        </ul>
     </div>
 
 </div>
 
-<script id="listTemp" type="text/x-jquery-tmpl">
-    <li class="clearfix">
-        <a href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}" class="v-link">
+<ul id="listTemp" style="display: none" class="ov-list"  jt-model="item in list">
+    <li>
+        <a class="clearfix" href="/play?vid={{item.vid}}&num={{item.num}}&time={{item.time}}&target={{item.target}}&user={{item.user}}" class="v-link">
             <div class="v">
-                <img style="width:100%;height:100%;" src="${img}">
+                <img style="width:100%;height:100%;" src="{{item.img}}">
                 <div class="v-duration">
-                    <span>${time}</span>
+                    <span>{{item.time}}</span>
                 </div>
             </div>
             <div class="v-item">
                 <h2>
-                    <span>${name}</span>
+                    <span>{{item.name}}</span>
                 </h2>
-                <div class="img-src v-num">${num}次播放</div>
+                <div class="img-src v-num">{{item.num}}次播放</div>
             </div>
         </a>
     </li>
-</script>
+</ul>

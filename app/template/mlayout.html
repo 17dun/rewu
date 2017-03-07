@@ -8,12 +8,7 @@
       <title>91热舞</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-      <style>
-          body{
-              margin:0;
-          }
-      </style>
+      <link rel="stylesheet" href="/css/bundle.css"/>
   </head>
   <body>
     <div class="wrap">
@@ -23,7 +18,12 @@
         </div>
     </div>
   </body>
-  <script type="text/javascript" src="/js/common.js"></script>
+  <% if(env=='dev') {%>
+  <script type="text/javascript" src="/js/dev.js"></script>
   <script type="text/javascript" src="/js/page/<%=pageName%>.js"></script>
+  <% } else { %>
+  <script type="text/javascript" src="/js/bundle.js"></script>
+  <script type="text/javascript" src="/js/page/<%=pageName%>.js"></script>
+  <% } %>
 </html>
 <% } %>

@@ -12,18 +12,18 @@ module.exports = {
 
 	// 应用全局配置
 	app: {
-		port: 8000,
+		port: 8080,
 		httpAgentMaxSocks: 30000
 	},
 
 	statics: {
 		basePath: 'http://127.0.0.1/client/',
-		staticRoute: 'client/src'
+		staticRoute: 'client/build'
 	},
 
 	// 文本宏
 	consts: {
-		siteName: '甜菜金融'
+		siteName: '91热舞'
 	},
 
 	// 模板引擎相关配置
