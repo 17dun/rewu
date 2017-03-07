@@ -14,7 +14,14 @@ zeus.page({
         self.getList();
     },
     bindEvent: function(){
+        $('.submit').on('click', function () {
+            var wd = $.trim($('.search').val());
+            if (wd == '') {
+                return false;
+            }
 
+            window.location.href = '/search?word=' + wd;
+        });
     },
 
     getList: function(){
