@@ -12,8 +12,7 @@ module.exports = {
 
     // 应用全局配置
     app: {
-        port: 8000,
-        httpAgentMaxSocks: 30000
+        port: 8000
     },
 
     statics: {

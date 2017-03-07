@@ -11,8 +11,7 @@ module.exports = {
 
 	// 应用全局配置
 	app: {
-		port: 8000,
-		httpAgentMaxSocks: 30000
+		port: 8000
 	},
 
 	statics: {
@@ -22,7 +21,7 @@ module.exports = {
 
 	// 文本宏
 	consts: {
-		siteName: '甜菜金融'
+		siteName: '91热舞'
 	},
 
 	// 模板引擎相关配置
