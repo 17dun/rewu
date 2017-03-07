@@ -17,8 +17,6 @@ a, html * {
     position: fixed;
     top:0;
     left:0;
-    position: -webkit-sticky;
-    position:sticky;
     width:100%;
     -webkit-box-align: center;
     -webkit-align-items: center;

@@ -32,3 +32,14 @@ window.zeus = {
         });
     }
 };
+
+var u = navigator.userAgent, app = navigator.appVersion;
+var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+if (isiOS) {
+    $('.search').focus(function () {
+        window.setTimeout('scrollBottom()', 500);
+    });
+}
+function scrollBottom() {
+    window.scrollTo(0, $('body').height());
+}
