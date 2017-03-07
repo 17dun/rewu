@@ -62,7 +62,7 @@ gulp.task('online',function(){
 
 
 gulp.task('build', function () {
-    // common代码合并压缩
+    // 移动端js
     var jsArr = [];
     var data = fs.readFileSync('client/src/js/online.js', 'utf8');
     var arr = data.split('\n');
@@ -75,8 +75,25 @@ gulp.task('build', function () {
             }
         }
     }
-
     gulp.src(jsArr).pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('client/build/js/'));
+
+
+    //pc合并
+    var pcJsArr = [];
+    var pcData = fs.readFileSync('client/src/js/online-pc.js', 'utf8');
+    var pcArr = pcData.split('\n');
+    for (var i = 0, len = pcArr.length; i < len; i++) {
+        var regx = /src=\"(.+)\"/;
+        if (regx.test(pcArr[i])) {
+            var jsItem = pcArr[i].match(regx)[1];
+            if (jsItem !== '') {
+                pcJsArr.push('client/src' + jsItem);
+            }
+        }
+    }
+    gulp.src(pcJsArr).pipe(concat('pc-bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest('client/build/js/'));
 
@@ -87,14 +104,22 @@ gulp.task('build', function () {
         .pipe(uglify())
         .pipe(gulp.dest('client/build/js/page'))
 
+
     // 拷贝bower_components
     gulp.src('client/bower_components/*')
         .pipe(gulp.dest('client/build/bower_components'));
 
-    // //压缩编译less
+    // //压缩编译cess
     gulp.src(['client/src/css/**/*.css'])
     	.pipe(less())
         .pipe(minifyCss())
+        .pipe(gulp.dest('client/build/css/'));
+
+    //压缩编译less
+    gulp.src(['client/src/less/common.less'])
+        .pipe(less())
+        .pipe(minifyCss())
+        .pipe(concat('pc-bundle.css'))
         .pipe(gulp.dest('client/build/css/'));
 
 
