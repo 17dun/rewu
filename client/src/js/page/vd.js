@@ -183,6 +183,7 @@ zeus.page({
     },
 
     renderEdit: function(data){
+        $('#editBox').empty();
         $('#editFormTemp').tmpl(data).appendTo('#editBox');
     },
 
@@ -219,6 +220,7 @@ zeus.page({
     save: function(callback){
         var self = this;
         var data = $('#editform').serialize();
+        console.log(data);
         $.ajax({
             url: '/vd/save',
             type: 'GET',
