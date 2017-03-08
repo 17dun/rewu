@@ -59,17 +59,23 @@ module.exports = {
     },
 
     list: function(data){
-        var pageSize = data.pageSize*1 || 10;
+        var pageSize = data.pageSize*1 || 100;
         if(data.pageNum){
             from = (data.pageNum - 1) * data.pageSize;
         }else{
             from = 0;
         }
-
+        var find = {};
+        if(data.vdName){
+            find.name = {$regex:data.vdName};
+        }
+        if(data.vdUser){
+            find.user = {$regex:data.vdUser};
+        }
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find().skip(from).limit(pageSize).sort({_id:-1}).toArray(function(err, rt){
+                collection.find(find).skip(from).limit(pageSize).sort({_id:-1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
@@ -77,11 +83,16 @@ module.exports = {
                             data: err
                         });
                     }else{
-                        resovel({
-                            code: 0,
-                            msg: '查询成功',
-                            data: rt
-                        });
+                        collection.stats({},function(err,rt2){
+                            resovel({
+                                code: 0,
+                                msg: '查询成功',
+                                allNum: rt2.count,
+                                data: rt
+
+                            });
+                        })
+
                     }
                 });
             });

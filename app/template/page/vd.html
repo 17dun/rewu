@@ -1,32 +1,28 @@
 <div class="content-wrap">
     <form id="queryBox" class="form-inline">
         <div class="form-group">
-            <label for="foodNameQ">标题</label>
-            <input type="text" class="form-control" id="foodNameQ" name="foodNameQ">
+            <label for="vdName">标题</label>
+            <input type="text" class="form-control" id="vdName" name="vdName">
         </div>
         <div class="form-group">
-            <label for="foodHotQ">类型</label>
-           <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
-        </div>
-        <div class="form-group">
-            <label for="foodHotQ">来源</label>
-            <input type="text" class="form-control" id="foodHotQ" name="foodHotQ">
+            <label for="vdUser">贡献者</label>
+            <input type="text" class="form-control" id="vdUser" name="vdUser">
         </div>
         <button type="button" class="btn btn-primary query-btn">查询</button>
-        <button type="button" class="btn btn-primary add-btn">新建</button>
         <button type="button" class="btn btn-primary delall-btn">批量删除</button>
-        <button type="button" class="btn btn-primary import-btn">导入</button>
     </form>
-     <table class="table table-bordered table-striped task-table" id="listBox">
+    <div class="tip" style="margin-top:10px;">共<span id="allNum"></span>条结果,当前有<span id="listNum"></span>条</div>
+     <table style="margin-top:10px" class="table table-bordered table-striped task-table" id="listBox">
         <thead>
             <tr>
                 <th width="5%"><input type="checkbox" value="1"  class="all-check" /></th>
                 <th width="30%">标题</th>
-                <th width="20%">缩略图</th>
+                <th style="width:100px;">缩略图</th>
                 <th>播放次数</th>
+                <th>发布时间</th>
                 <th>时长</th>
                 <th>tip</th>
-                <th>VID</th>
+                <!--<th>VID</th>-->
                 <th>贡献者</th>
                 <th>操作</th>
             </tr>
@@ -70,39 +66,49 @@
       <div class="col-xs-12">
         <div class="form-group">
         <label for="foodName">标题</label>
-              <input type="text" class="form-control" id="foodName" name="foodName" value="${foodName}">
+              <input type="text" class="form-control" id="name" name="name" value="${name}">
         </div>
         <div class="form-group">
         <label for="foodHot">缩略图</label>
-              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+              <input type="text" class="form-control" id="img" name="img" value="${img}">
         </div>
          <div class="form-group">
-        <label for="foodHot">类型</label>
-              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        <label for="foodHot">播放量</label>
+              <input type="text" class="form-control" id="num" name="num" value="${num}">
         </div>
          <div class="form-group">
-        <label for="foodHot">标签</label>
-              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        <label for="foodHot">发布时间</label>
+              <input type="text" class="form-control" id="pub" name="pub" value="${pub}">
         </div>
          <div class="form-group">
-        <label for="foodHot">优酷ID</label>
-              <input type="text" class="form-control" id="foodHot" name="foodHot" value="${foodHot}">
+        <label for="foodHot">清晰度</label>
+              <input type="text" class="form-control" id="target" name="target" value="${target}">
+        </div>
+         <div class="form-group">
+        <label for="foodHot">时长</label>
+              <input type="text" class="form-control" id="time" name="time" value="${time}">
+        </div>
+         <div class="form-group">
+        <label for="foodHot">用户</label>
+              <input type="text" class="form-control" id="user" name="user" value="${user}">
         </div>
       </div>
     </form>
     </div>
     </div>
+
 </script>
 
 <script id="listTemp" type="text/x-jquery-tmpl">
     <tr data-itemid="${_id}" data-itemname="${foodName}">
         <td width="5%"><input class="item-check" type="checkbox"/></td>
         <td width="10%"><a target="_blank" href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}">${name}</a></td>
-        <td width="15%"><a target="_blank" href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}"><img style="width:100px;height:100px" src='${img}'></a></td>
+        <td style="100px;"><a target="_blank" href="/play?vid=${vid}&num=${num}&time=${time}&target=${target}&user=${user}"><img style="width:100px;height:100px" src='${img}'></a></td>
         <td>${num}</td>
+        <td>${pub}</td>
         <td>${time}</td>
         <td>${target}</td>
-        <td>${vid}</td>
+        <!--<td>${vid}</td>-->
         <td>${user}</td>
         <td>
             <a href="javascript:;" type="button" class="edit-btn">编辑</a>

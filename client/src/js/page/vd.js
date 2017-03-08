@@ -7,6 +7,7 @@
 zeus.page({
     initDatas: function () {
         self.list = [];
+        self.allNum = 0;
     },
     // 初始化部件
     initParts: function () {
@@ -101,27 +102,46 @@ zeus.page({
     },
 
     alldel: function(){
-        var ids = [];
-        $('.item-check:checked').each(function(i,item){
-            ids.push($(item).parent().parent().data('itemid'));
-        });
-        $.ajax({
-            url: '/vd/delall',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                ids: ids
-            },
-            success: function(rt){
-                if(!rt.code){
-                    self.getList();
+        $('#delBox').dialog({
+            title:'警告',
+            modal:true,
+            width:300,
+            buttons: [
+                {
+                    text: "确定",
+                    click: function(){
+                        var ids = [];
+                        $('.item-check:checked').each(function(i,item){
+                            ids.push($(item).parent().parent().data('itemid'));
+                        });
+                        $.ajax({
+                            url: '/vd/delall',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                ids: ids
+                            },
+                            success: function(rt){
+                                if(!rt.code){
+                                    self.getList();
+                                }
+
+                            },
+                            error: function(rt){
+                                //alert('失败');
+                            }
+                        });
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    text: "取消",
+                    click: function(){
+                        $(this).dialog("close");
+                    }
                 }
-                
-            },
-            error: function(rt){
-                //alert('失败');
-            }
-        });
+            ]
+        })
 
     },
 
@@ -141,6 +161,7 @@ zeus.page({
             data: data,
             success: function(rt){
                 self.list = rt.data;
+                self.allNum = rt.allNum;
                 self.renderList();
             },
             error: function(rt){
@@ -150,6 +171,8 @@ zeus.page({
     },
 
     renderList: function(){
+        $('#allNum').html(self.allNum);
+        $('#listNum').html(self.list.length);
         $("#listBody").empty();
         $('#listTemp').tmpl(self.list).appendTo('#listBody');
     },
@@ -160,7 +183,6 @@ zeus.page({
     },
 
     renderEdit: function(data){
-        $("#editBox").empty();
         $('#editFormTemp').tmpl(data).appendTo('#editBox');
     },
 
