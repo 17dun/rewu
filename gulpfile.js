@@ -33,6 +33,21 @@ gulp.task('open', function () {
 	opn('http://127.0.0.1:8000', {app: ['google chrome']})
 })
 
+gulp.task('up', function () {
+    spawn('git',['pull']);
+})
+
+gulp.task('dep', function () {
+    spawn('npm',['install','--production']);
+})
+
+gulp.task('ci', function () {
+    spawn('git',['add', '.']);
+    spawn('git',['commit','-m', 'update']);
+    spawn('git',['push']);
+})
+
+
 gulp.task('start', function () {
     gulp.src('conf/dev/index.js')
         .pipe(gulp.dest('conf'));
