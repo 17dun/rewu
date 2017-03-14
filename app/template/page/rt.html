@@ -1,0 +1,35 @@
+<div class="content-wrap">
+
+    <form id="queryBox" class="rt-form">
+        <table class="table" style="width:65%;">
+            <thead>
+                <tr>
+                    <th width="50">类型</th>
+                    <th width="120">预览</th>
+                    <th width="350">ID</th>
+                    <th width="20">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>头条</td>
+                    <td><img style="width:100px;height:100px;" src="<%=indexImg%>" alt=""><div><%=indexName%></div></td>
+                    <td><input type="text" value="<%=indexId%>" /></td>
+                    <td><button type="button" class="btn btn-primary">保存</button></td>
+                </tr>
+                <% list.forEach(function(item,i){%>
+                <tr>
+                    <td><%=i+1 %></td>
+                    <td><img style="width:100px;height:100px;"  src="<%=item.img%>"><div><%=item.name%></div></td>
+                    <td><input type="text" value="<%=item.vid %>" /></td>
+                    <td><button type="button" class="btn btn-primary">保存</button></td>
+                </tr>
+                <% }) %>
+            </tbody>
+
+        </table>
+
+    </form>
+
+    <p class="alert alert-success" id="bgMsg" style="opacity:0">操作成功!</p>
+</div>

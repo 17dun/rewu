@@ -47,5 +47,13 @@ module.exports = {
     },
 
 
-    db: 'mongodb://localhost:27017/rewu'
+    db: 'mongodb://localhost:27017/rewu',
+
+    channel: [
+        {id: 0, title: '头条'},
+        {id: 1, title: '推荐'},
+        {id: 2, title: '热舞'},
+        {id: 3, title: '自拍'},
+        {id: 4, title: '聊天'}
+    ]
 }

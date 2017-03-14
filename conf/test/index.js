@@ -57,5 +57,13 @@ module.exports = {
 		port: 6379
 	},
 
-    db: 'mongodb://localhost:27017/sousou'
+    db: 'mongodb://localhost:27017/sousou',
+
+	channel: [
+		{id:0,title:'头条'},
+		{id:1,title:'推荐'},
+		{id:2,title:'热舞'},
+		{id:3,title:'自拍'},
+		{id:4,title:'聊天'}
+	]
 }

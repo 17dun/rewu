@@ -30,7 +30,7 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find().limit(7).sort({num:-1}).toArray(function(err, rt){
+                collection.find({channel:'0'}).limit(7).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
@@ -38,7 +38,6 @@ module.exports = {
                             data: err
                         });
                     }else{
-
                         resovel({
                             code: 0,
                             msg: '查询成功',

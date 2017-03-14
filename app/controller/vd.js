@@ -5,6 +5,7 @@
  * @date 2017/3/7
  */
 var vdModel = require('../model/vd.js');
+var channelList = require('../../conf').channel;
 
 module.exports = {
 
@@ -51,6 +52,7 @@ module.exports = {
     list: function *(){
         var data = this.query;
         var rs = yield vdModel.list(data);
+        rs.channelList = channelList;
         yield this.api(rs);
         
     },
@@ -80,7 +82,16 @@ module.exports = {
         var data = this.request.body;
         var rs = yield vdModel.delall(data);
         yield this.api(rs);
-    }
+    },
 
+
+
+    //推荐列表管理
+    //显示页面
+    setchannel: function *(){
+        var data = this.query;
+        var rs = yield vdModel.setchannel(data.vid, data.channel);
+        yield this.api(rs);
+    }
 
 };

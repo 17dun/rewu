@@ -54,52 +54,45 @@ zeus.page({
             self.alldel();
         });
 
-        $('.import-btn').on('click', function(){
-            self.imports();
-        })
-    },
-
-    imports: function(btn){
-        var self = this;
-        $('#importBox').dialog({
-            title:'导入json',
-            modal:true,
-            width:600,
-            buttons: [
-                {
-                    text: "保存",
-                    click: function(){
-                        var box = this;
-                        self.saveList(function(){
-                            self.getList();
-                            self.msg(1);
-                            $(box).dialog("close");
-                        });
-                    }
-                }
-            ]
-        })
-    },
-
-    saveList: function(callback){
-        var self = this;
-        var data = $('#jsonObj').val();
-        $.ajax({
-            url: '/vd/saveList',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                list: data
-            },
-            success: function(rt){
-                callback();
-            },
-            error: function(rt){
-                self.msg(0,'保存失败')
-            }
+        $('#listBody').on('click', '.rt-btn' , function(){
+            var vid = $(this).parent().parent().data('itemid');
+            self.setChannel(vid, 1);
         });
 
+        $('#listBody').on('click', '.fs-btn', function(){
+            var vid = $(this).parent().parent().data('itemid');
+            self.setChannel(vid, 0);
+        });
+
+        $('#listBody').on('change', '.channelBox', function(){
+            var vid = $(this).parent().parent().data('itemid');
+            self.setChannel(vid, $(this).val());
+        });
     },
+
+    setChannel: function(vid, channel){
+        $.ajax({
+            url: '/vd/setchannel',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                vid: vid,
+                channel: channel
+            },
+            success: function(rt){
+                if(!rt.code){
+                    self.msg(1);
+                }else{
+                    self.msg(0);
+                }
+                self.getList();
+            },
+            error: function(rt){
+                self.msg(0);
+            }
+        });
+    },
+
 
     alldel: function(){
         $('#delBox').dialog({
@@ -161,6 +154,7 @@ zeus.page({
             data: data,
             success: function(rt){
                 self.list = rt.data;
+                self.channelList = rt.channelList;
                 self.allNum = rt.allNum;
                 self.renderList();
             },
@@ -175,6 +169,11 @@ zeus.page({
         $('#listNum').html(self.list.length);
         $("#listBody").empty();
         $('#listTemp').tmpl(self.list).appendTo('#listBody');
+        self.renderChannelList();
+    },
+
+    renderChannelList: function(){
+        $('.channelBox').append($('#channelTemp').tmpl(self.channelList));
     },
 
     add: function(){
