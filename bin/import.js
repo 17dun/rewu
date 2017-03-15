@@ -1,8 +1,10 @@
 print('=========开始导入==========');
 load( './data.js' );
+print(list.length);
 var importTime = new Date().getTime();
 var importNum = 0;
 for(var i=0; i<list.length; i++){
+    print(list[i].vid);
     var res=db.vds.find({vid:list[i].vid});
     if(!res.length()){
         list[i].importTime = importTime;

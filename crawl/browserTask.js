@@ -41,16 +41,17 @@
                 });
             }
         }
-        var result = JSON.stringify(rt);
-        alert(result);
-        var value = '';
-        if(!localStorage.getItem('vds')){
-            value = result;
-        }else{
-            value = localStorage.getItem('vds') + ',' + result;
-        }
+        if(rt.length){
+            var result = JSON.stringify(rt);
+            var value = '';
+            if(!localStorage.getItem('vds')){
+                value = result;
+            }else{
+                value = localStorage.getItem('vds') + ',' + result;
+            }
 
-        localStorage.setItem('vds', value);
+            localStorage.setItem('vds', value);
+        }
         setTimeout(next, 500);
 
     }
@@ -70,7 +71,7 @@
             var str = localStorage.getItem('vds');
             var sqlStr = str.replace(/\],\[/g,',');
 
-            document.write(sqlStr);
+            document.write('var list = ' + sqlStr);
             not();
         }else{
             //hideYouKu();
@@ -118,6 +119,6 @@
     }
 
     hideYouKu();
-    setTimeout(ifOutPut,2000);
+    setTimeout(ifOutPut,1000);
     // Your code here...
 })();
