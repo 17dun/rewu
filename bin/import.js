@@ -8,6 +8,7 @@ for(var i=0; i<list.length; i++){
     var res=db.vds.find({vid:list[i].vid});
     if(!res.length()){
         list[i].importTime = importTime;
+        list[i].randomNum = Math.floor(Math.random()*10000);
         db.vds.save(list[i]);
         print('ok');
         importNum++;

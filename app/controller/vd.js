@@ -11,7 +11,9 @@ module.exports = {
 
     //显示页面
     show: function *(){
-        yield this.render('vd');
+        yield this.render('vd',{
+            channelList:channelList
+        });
         
     },
 
@@ -81,6 +83,13 @@ module.exports = {
     delall: function *(){
         var data = this.request.body;
         var rs = yield vdModel.delall(data);
+        yield this.api(rs);
+    },
+
+    //添加食物
+    setall: function *(){
+        var data = this.request.body;
+        var rs = yield vdModel.setall(data);
         yield this.api(rs);
     },
 

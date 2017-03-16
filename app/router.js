@@ -47,6 +47,7 @@ function setMap(ctrs) {
     router.get('/vd/save', ctrs.vd.save);
     router.get('/vd/del', ctrs.vd.del);
     router.post('/vd/delall', ctrs.vd.delall);
+    router.post('/vd/setall', ctrs.vd.setall);
 
 
     router.get('/vd/setchannel', ctrs.vd.setchannel);

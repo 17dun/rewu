@@ -7,6 +7,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var DB_CONN_STR = require('../../conf').db;
 var ObjectId =  require('mongodb').ObjectID;
+var channelList = require('../../conf').channel;
 module.exports = {
 
     reList: function(data){
@@ -14,8 +15,8 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                var start = Math.floor(Math.random()*1000);
-                collection.find().skip(start).limit(20).sort({_id:1}).toArray(function(err, rt){
+                var rd = Math.floor(Math.random()*1000);
+                collection.find({channel:'1', randomNum:{$gt:rd}}).limit(20).sort({randomNum:1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
@@ -59,6 +60,7 @@ module.exports = {
     },
 
     list: function(data){
+        var self = this;
         var pageSize = data.pageSize*1 || 100;
         if(data.pageNum){
             from = (data.pageNum - 1) * data.pageSize;
@@ -84,6 +86,9 @@ module.exports = {
                         });
                     }else{
                         collection.stats({},function(err,rt2){
+                            for(var i=0; i<rt.length; i++){
+                                rt[i].channelTitle = self.getChannelTitle(rt[i].channel);
+                            }
                             resovel({
                                 code: 0,
                                 msg: '查询成功',
@@ -97,6 +102,14 @@ module.exports = {
                 });
             });
         });
+    },
+    getChannelTitle: function(channelId){
+        for(var i=0; i<channelList.length;i++){
+            if(channelList[i].id == channelId){
+                return channelList[i].title;
+                break;
+            }
+        }
     },
     save: function(data){
         var self = this;
@@ -186,6 +199,43 @@ module.exports = {
             });
         });
     },
+
+
+    setall: function(data){
+        return new Promise(function (resovel, reject) {
+            MongoClient.connect(DB_CONN_STR, function(err, db){
+                var collection = db.collection('vds');
+                var num = 0;
+                if(!data.ids||!data.ids.length){
+                    resovel({
+                        code: 1,
+                        msg: '失败'
+                    });
+                    return;
+                }
+                data.ids.forEach(function(item){
+                    var whereStr = {_id:ObjectId(item)}
+                    var setChannelTime = new Date().getTime();
+                    collection.update(whereStr, {$set:{channel: data.channel,setChannelTime: setChannelTime}}, function(err, rt){
+                        if(err){
+                            resovel({
+                                code: 1,
+                                msg: '失败'
+                            });
+                        }else{
+                            num++;
+                            if(num==data.ids.length){
+                                resovel({
+                                    code: 0,
+                                    msg: '成功'
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    },
     
     detail: function(fid){
         return new Promise(function (resovel, reject) {
@@ -216,7 +266,8 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.update({_id: ObjectId(vid)}, {$set:{channel: channel}}, function(err, rt){
+                var setChannelTime = new Date().getTime();
+                collection.update({_id: ObjectId(vid)}, {$set:{channel: channel,setChannelTime: setChannelTime}}, function(err, rt){
                     if(err){
                         resovel({
                             code: 1,

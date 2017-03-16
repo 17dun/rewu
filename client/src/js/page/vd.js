@@ -25,12 +25,15 @@ zeus.page({
         var $queryBtn = self.parts.$form.find('.query-btn');
         $queryBtn.on('click', function(){
             self.getList();
-        })
+        });
 
         var $addBtn = self.parts.$form.find('.add-btn');
         $addBtn.on('click', function(){
             self.add();
-        })
+        });
+
+
+
 
         $('#listBody').on('click', '.edit-btn', function(){
             self.edit(this);
@@ -52,6 +55,10 @@ zeus.page({
 
         $('.delall-btn').on('click', function(){
             self.alldel();
+        });
+
+        $('.set-all').on('click', function(){
+            self.allSet();
         });
 
         $('#listBody').on('click', '.rt-btn' , function(){
@@ -117,11 +124,13 @@ zeus.page({
                             success: function(rt){
                                 if(!rt.code){
                                     self.getList();
+                                }else{
+                                    self.msg(0);
                                 }
 
                             },
                             error: function(rt){
-                                //alert('失败');
+                                self.msg(0);
                             }
                         });
                         $(this).dialog("close");
@@ -137,6 +146,36 @@ zeus.page({
         })
 
     },
+
+
+
+    allSet: function(){
+        var ids = [];
+        $('.item-check:checked').each(function(i,item){
+            ids.push($(item).parent().parent().data('itemid'));
+        });
+        var channel = $('#setAll').val();
+        $.ajax({
+            url: '/vd/setall',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                ids: ids,
+                channel: channel
+            },
+            success: function(rt){
+                if(!rt.code){
+                    self.getList();
+                }else{
+                    self.msg();
+                }
+            },
+            error: function(rt){
+                self.msg();
+            }
+        });
+    },
+
 
     allcheck: function(flag){
         $('.item-check').each(function(i,item){
@@ -175,6 +214,7 @@ zeus.page({
     renderChannelList: function(){
         $('.channelBox').append($('#channelTemp').tmpl(self.channelList));
     },
+
 
     add: function(){
         var self = this;

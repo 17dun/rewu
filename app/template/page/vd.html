@@ -10,6 +10,15 @@
         </div>
         <button type="button" class="btn btn-primary query-btn">查询</button>
         <button type="button" class="btn btn-primary delall-btn">批量删除</button>
+        <div class="form-group" style="margin-left:40px;">
+            <select name="setAll" class="form-control" id="setAll">
+                <option value="-1">批量设置频道</option>
+                <% channelList.forEach(function(item,i){%>
+                    <option value="<%= item.id%>"><%= item.title%></option>
+                <% }) %>
+            </select>
+            <button type="button" class="btn btn-primary set-all">设置</button>
+        </div>
     </form>
     <div class="tip" style="margin-top:10px;">共<span id="allNum"></span>条结果,当前有<span id="listNum"></span>条</div>
      <table style="margin-top:10px" class="table table-bordered table-striped task-table" id="listBox">
@@ -98,7 +107,7 @@
         <td>${target}</td>
         <!--<td>${vid}</td>-->
         <td>${user}</td>
-        <td>${channel}</td>
+        <td>${channelTitle}</td>
         <td>
             <a href="javascript:;" type="button" class="edit-btn">编辑</a>
             <a href="javascript:;" type="button" class="del-btn">删除</a>

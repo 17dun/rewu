@@ -6,7 +6,9 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find().skip(start*50).limit(50).sort({_id:-1}).toArray(function(err, rt){
+                var rd = Math.floor(Math.random()*10000);
+                console.log(rd);
+                collection.find({channel:{$ne:'0'},randomNum:{$gt:rd}}).skip(start*30).limit(30).sort({randomNum:1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
@@ -30,7 +32,7 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find({channel:'0'}).limit(7).toArray(function(err, rt){
+                collection.find({channel:'0'}).limit(41).sort({setChannelTime:-1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,
