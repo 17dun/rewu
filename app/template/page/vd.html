@@ -1,26 +1,46 @@
 <div class="content-wrap">
     <form id="queryBox" class="form-inline">
-        <div class="form-group">
-            <label for="vdName">标题</label>
-            <input type="text" class="form-control" id="vdName" name="vdName">
-        </div>
-        <div class="form-group">
-            <label for="vdUser">贡献者</label>
-            <input type="text" class="form-control" id="vdUser" name="vdUser">
-        </div>
-        <button type="button" class="btn btn-primary query-btn">查询</button>
-        <button type="button" class="btn btn-primary delall-btn">批量删除</button>
-        <div class="form-group" style="margin-left:40px;">
-            <select name="setAll" class="form-control" id="setAll">
-                <option value="-1">批量设置频道</option>
-                <% channelList.forEach(function(item,i){%>
+        <div class="container">
+            <div class="row">
+                <div class="form-group">
+                    <label for="vdName">标题</label>
+                    <input type="text" class="form-control" id="vdName" name="vdName">
+                    <label for="vdName">VID</label>
+                    <input type="text" class="form-control" id="vdId" name="vdId">
+                    <select name="vdUser" class="form-control" id="vdUser">
+                        <option value="">所有来源</option>
+                        <% users.forEach(function(item,i){%>
+                        <option value="<%= item%>"><%= item%></option>
+                        <% }) %>
+                    </select>
+                    <select name="vdChannel" class="form-control" id="vdChannel">
+                        <option value="">所有频道</option>
+                        <% channelList.forEach(function(item,i){%>
+                        <option value="<%= item.id%>"><%= item.title%></option>
+                        <% }) %>
+                    </select>
+                    <select name="vdImport" class="form-control" id="vdImport">
+                        <option value="">所有导入批次</option>
+                        <% importTimes.forEach(function(item,i){%>
+                        <option value="<%= item%>"><%= item%></option>
+                        <% }) %>
+                    </select>
+                    <button type="button" class="btn btn-primary query-btn">查询</button>
+                </div>
+
+                <button type="button" class="btn btn-primary delall-btn">批量删除</button>
+                <select name="setAll" class="form-control" id="setAll">
+                    <option value="-1">批量设置频道</option>
+                    <% channelList.forEach(function(item,i){%>
                     <option value="<%= item.id%>"><%= item.title%></option>
-                <% }) %>
-            </select>
-            <button type="button" class="btn btn-primary set-all">设置</button>
+                    <% }) %>
+                </select>
+                <button type="button" class="btn btn-primary set-all">设置</button>
+            </div>
+
         </div>
     </form>
-    <div class="tip" style="margin-top:10px;">共<span id="allNum"></span>条结果,当前有<span id="listNum"></span>条</div>
+    <div class="tip" style="margin-top:30px;">共<span id="allNum"></span>条结果,当前有<span id="listNum"></span>条</div>
      <table style="margin-top:10px" class="table table-bordered table-striped task-table" id="listBox">
         <thead>
             <tr>
@@ -33,8 +53,8 @@
                 <th>时长</th>
                 <th>tip</th>
                 <!--<th>VID</th>-->
-                <th>贡献者</th>
-                <th>类型</th>
+                <th>来源</th>
+                <th>频道</th>
                 <th>操作</th>
             </tr>
         </thead>

@@ -59,6 +59,44 @@ module.exports = {
         });
     },
 
+    getUsers: function(){
+        return new Promise(function (resovel, reject) {
+            MongoClient.connect(DB_CONN_STR, function(err, db){
+                var collection = db.collection('vds');
+                collection.distinct('user',function(err, rt){
+                    if(err){
+                        resovel({
+                            code: 1,
+                            msg: '数据库查询失败',
+                            data: err
+                        });
+                    }else{
+                        resovel(rt.reverse());
+                    }
+                })
+            });
+        });
+    },
+
+    getImportTimes: function(){
+        return new Promise(function (resovel, reject) {
+            MongoClient.connect(DB_CONN_STR, function(err, db){
+                var collection = db.collection('vds');
+                collection.distinct('importTime',function(err, rt){
+                    if(err){
+                        resovel({
+                            code: 1,
+                            msg: '数据库查询失败',
+                            data: err
+                        });
+                    }else{
+                        resovel(rt.reverse());
+                    }
+                })
+            });
+        });
+    },
+
     list: function(data){
         var self = this;
         var pageSize = data.pageSize*1 || 100;
@@ -73,6 +111,15 @@ module.exports = {
         }
         if(data.vdUser){
             find.user = {$regex:data.vdUser};
+        }
+        if(data.vdId){
+            find.vid = data.vdId;
+        }
+        if(data.vdChannel){
+            find.channel = data.vdChannel;
+        }
+        if(data.vdImport){
+            find.importTime = data.vdImport*1;
         }
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){

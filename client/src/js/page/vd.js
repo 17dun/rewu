@@ -208,6 +208,7 @@ zeus.page({
         $('#listNum').html(self.list.length);
         $("#listBody").empty();
         $('#listTemp').tmpl(self.list).appendTo('#listBody');
+        $('.all-check').prop('checked',false);
         self.renderChannelList();
     },
 

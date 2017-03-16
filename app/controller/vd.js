@@ -11,8 +11,12 @@ module.exports = {
 
     //显示页面
     show: function *(){
+        var users = yield vdModel.getUsers();
+        var importTimes = yield vdModel.getImportTimes();
         yield this.render('vd',{
-            channelList:channelList
+            channelList: channelList,
+            users: users,
+            importTimes: importTimes
         });
         
     },
@@ -58,6 +62,7 @@ module.exports = {
         yield this.api(rs);
         
     },
+
 
     //获取详细信息
     detail: function *(){
