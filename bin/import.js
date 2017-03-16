@@ -1,5 +1,5 @@
 print('=========开始导入==========');
-load( './data.js' );
+load( './data/20170316/17.js' );
 print(list.length);
 var importTime = new Date().getTime();
 var importNum = 0;

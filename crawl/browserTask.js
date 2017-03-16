@@ -101,7 +101,7 @@
 
 
     function hideYouKu(){
-        var allNum = $('page').html();
+        var allNum = $('.next').prev().find('a').html();
         var current = location.href.split('videos?page=')[1];
         document.title = '(' + current + '/' + allNum +')'+'抓取中,请稍后..';
         document.body.style.display = 'none';
