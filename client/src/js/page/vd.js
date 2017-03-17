@@ -71,6 +71,11 @@ zeus.page({
             self.setChannel(vid, 0);
         });
 
+        $('#listBody').on('click', '.checkTr', function(){
+            var $checkItem = $(this).find('.item-check');
+            $(this).find('.item-check ').prop('checked',!$checkItem.prop('checked'))
+        });
+
         $('#listBody').on('change', '.channelBox', function(){
             var vid = $(this).parent().parent().data('itemid');
             self.setChannel(vid, $(this).val());
