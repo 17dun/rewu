@@ -4,9 +4,9 @@ var importNum = 0;
 var allNum = 0;
 var fileNum = 0;
 
-var dir = '20170316';
-var startIndex = 16;
-var endIndex = 100;
+var dir = '20170318';
+var startIndex = 1;
+var endIndex = 30;
 
 for(var index=startIndex; index<endIndex; index++){
     try{
