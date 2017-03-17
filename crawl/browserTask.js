@@ -44,13 +44,13 @@
         if(rt.length){
             var result = JSON.stringify(rt);
             var value = '';
-            if(!localStorage.getItem('vds')){
+            if(!localStorage.getItem(UID)){
                 value = result;
             }else{
-                value = localStorage.getItem('vds') + ',' + result;
+                value = localStorage.getItem(UID) + ',' + result;
             }
 
-            localStorage.setItem('vds', value);
+            localStorage.setItem(UID, value);
         }
         setTimeout(next, 500);
 
@@ -60,27 +60,24 @@
     function checkAndClear(){
         var curNum = location.href.split('videos?page=')[1]*1;
         if(curNum==1){
-            localStorage.setItem('vds', '');
+            localStorage.setItem(UID, '');
         }
 
     }
 
-    //输出结果
+    //是否输出结果
     function ifOutPut(){
         if($('.YK-box .title span').html()=='(0)'){
-            var str = localStorage.getItem('vds');
+            var str = localStorage.getItem(UID);
             var sqlStr = str.replace(/\],\[/g,',');
-
             document.write('var list = ' + sqlStr);
             not();
         }else{
-            //hideYouKu();
             parse();
         }
     }
 
     //通知
-
     function not(){
         document.title = '抓取完成!';
         var options = {
@@ -118,7 +115,7 @@
         location.href = nextPage;
     }
 
+    var UID = location.href.split('com/i/')[1].split('/videos?')[0];
     hideYouKu();
     setTimeout(ifOutPut,1000);
-    // Your code here...
 })();
