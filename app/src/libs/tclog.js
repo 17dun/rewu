@@ -6,7 +6,7 @@
  */
 
 var tclog = {};
-var logConf = require('../../conf/index.js').log;
+var logConf = require('../conf/index.js').log;
 var fs = require('fs');
 var chalk = require('chalk');
 var inspect = require('util').inspect;

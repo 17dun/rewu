@@ -4,55 +4,68 @@
  * @author xiaoguang01
  * @date 2015/9/25
  */
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var livereload = require('gulp-livereload');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var less = require('gulp-less');
-var minifyCss = require('gulp-minify-css');
-var fs = require('fs');
-var opn = require('opn');
-var gulpSequence = require('gulp-sequence');
-var spawn = require('child_process').spawnSync;
+import gulp from 'gulp';
+import nodemon from 'gulp-nodemon';
+import livereload from 'gulp-livereload';
+import concat from 'gulp-concat';
+import uglify from 'gulp-uglify';
+import less from 'gulp-less';
+import minifyCss from 'gulp-minify-css';
+import fs from 'fs';
+import opn from 'opn';
+import gulpSequence from 'gulp-sequence';
+import {spawnSync} from 'child_process';
+import bable from 'gulp-babel';
+import del from 'del';
+
+
+const paths = {
+  allSrcJs: 'src/**/*.js',
+  libDir: 'lib',
+
+};
 
 
 // 监听静态文件和模板以及pid修改，并刷新页面
-gulp.task('watch', function () {
+gulp.task('watch',() => {
     livereload.listen(8002);
     gulp.watch([
         './pid',
         'app/template/**/*.*',
         'client/src/!photo/*.*'
-    ], function (event) {
+    ], (event) => {
         gulp.src('').pipe(livereload());
     })
 });
 
-gulp.task('open', function () {
+gulp.task('open', () => {
 	opn('http://127.0.0.1:8000', {app: ['google chrome']})
 })
 
-gulp.task('up', function () {
-    spawn('git',['pull']);
+gulp.task('up', () => {
+    spawnSync('git',['pull']);
 })
 
-gulp.task('dep', function () {
-    spawn('npm',['install','--production']);
+gulp.task('dep', () => {
+    spawnSync('npm',['install','--production']);
 })
 
-gulp.task('ci', function () {
-    spawn('git',['add', '.']);
-    spawn('git',['commit','-m', 'update']);
-    spawn('git',['push']);
+gulp.task('ci', () => {
+    spawnSync('git',['add', '.']);
+    spawnSync('git',['commit','-m', 'update']);
+    spawnSync('git',['push']);
 })
 
 
-gulp.task('start', function () {
-    gulp.src('conf/dev/index.js')
-        .pipe(gulp.dest('conf'));
+gulp.task('start', () => {
+    gulp.src('./app/src/conf/dev/index.js')
+        .pipe(gulp.dest('./app/src/conf'));
+    del('./app/build');
+    gulp.src('./app/src/**/*.js')
+        .pipe(bable())
+        .pipe(gulp.dest('./app/build'));
     nodemon({
-        script: './app/bootSrtap.js',
+        script: './app/build/bootSrtap.js',
         ext: 'js',
         execMap: {
             js: 'node --harmony'
@@ -67,48 +80,48 @@ gulp.task('start', function () {
 });
 
 
-gulp.task('deploy',function(){
+gulp.task('deploy', () => {
     gulp.src('conf/online/index.js')
         .pipe(gulp.dest('conf'));
-    spawn('pm2',['stop', 'app/bootSrtap.js']);
-    spawn('pm2',['start', 'app/bootSrtap.js']);
+    spawnSync('pm2',['stop', 'app/bootSrtap.js']);
+    spawnSync('pm2',['start', 'app/bootSrtap.js']);
 });
 
-
-
-
-gulp.task('build', function () {
+gulp.task('build', () => {
     // 移动端js
-    var jsArr = [];
-    var data = fs.readFileSync('client/src/js/online.js', 'utf8');
-    var arr = data.split('\n');
-    for (var i = 0, len = arr.length; i < len; i++) {
-        var regx = /src=\"(.+)\"/;
-        if (regx.test(arr[i])) {
-            var jsItem = arr[i].match(regx)[1];
+    let jsArr = [];
+    let data = fs.readFileSync('client/src/js/online.js', 'utf8');
+    let arr = data.split('\n');
+    arr.forEach((item) => {
+        let regx = /src=\"(.+)\"/;
+        if (regx.test(item)) {
+            let jsItem = item.match(regx)[1];
             if (jsItem !== '') {
                 jsArr.push('client/src' + jsItem);
             }
         }
-    }
+    });
+
     gulp.src(jsArr).pipe(concat('bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest('client/build/js/'));
 
 
     //pc合并
-    var pcJsArr = [];
-    var pcData = fs.readFileSync('client/src/js/online-pc.js', 'utf8');
-    var pcArr = pcData.split('\n');
-    for (var i = 0, len = pcArr.length; i < len; i++) {
-        var regx = /src=\"(.+)\"/;
-        if (regx.test(pcArr[i])) {
-            var jsItem = pcArr[i].match(regx)[1];
+    let pcJsArr = [];
+    let pcData = fs.readFileSync('client/src/js/online-pc.js', 'utf8');
+    let pcArr = pcData.split('\n');
+
+    pcArr.forEach((item) => {
+        let regx = /src=\"(.+)\"/;
+        if (regx.test(item)) {
+            let jsItem = item.match(regx)[1];
             if (jsItem !== '') {
                 pcJsArr.push('client/src' + jsItem);
             }
         }
-    }
+    });
+
     gulp.src(pcJsArr).pipe(concat('pc-bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest('client/build/js/'));
@@ -145,7 +158,7 @@ gulp.task('build', function () {
 });
 
 // livereload
-gulp.task('reload', function () {
+gulp.task('reload', () => {
     gulp.src('')
         .pipe(livereload());
 });
@@ -161,6 +174,6 @@ gulp.task('dev', gulpSequence(
 gulp.task('online', gulpSequence('build', 'deploy'));
 
 //下线
-gulp.task('offline',function(){
-    spawn('pm2',['stop', 'app/bootSrtap.js']);
+gulp.task('offline', () => {
+    spawnSync('pm2', ['stop', 'app/bootSrtap.js']);
 });

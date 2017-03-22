@@ -4,7 +4,7 @@
  * @author xiaoguang01
  * @date 2015/9/25
  */
-var config = require('../conf');
+import config from './conf';
 var koa = require('koa');
 var view = require('./libs/template');
 var router = require('./router.js');

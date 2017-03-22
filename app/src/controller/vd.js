@@ -5,7 +5,7 @@
  * @date 2017/3/7
  */
 var vdModel = require('../model/vd.js');
-var channelList = require('../../conf').channel;
+var channelList = require('../conf').channel;
 
 module.exports = {
 

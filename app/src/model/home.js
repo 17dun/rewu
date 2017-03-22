@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var DB_CONN_STR = require('../../conf').db;
+var DB_CONN_STR = require('../conf').db;
 var ObjectId =  require('mongodb').ObjectID;
 module.exports = {
     list: function(start){
