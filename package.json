@@ -4,6 +4,7 @@
   "description": "91rewu",
   "main": "index.js",
   "dependencies": {
+    "babel-cli": "^6.24.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-latest": "^6.24.0",
     "co": "^4.6.0",

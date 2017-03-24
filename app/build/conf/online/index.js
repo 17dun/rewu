@@ -4,9 +4,9 @@
  * @author xiaoguang01
  * @date 2015/9/25
  */
-"use strict";
-var path = require('path');
-module.exports = {
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });
+var path = require('path');exports.default =
+{
 	// 当前运行模式
 	runEnv: 'online',
 

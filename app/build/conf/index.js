@@ -5,7 +5,7 @@
  * @date 2015/9/25
  */
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });
-var path = require('path');exports.default =
+var _path = require('path');var _path2 = _interopRequireDefault(_path);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 {
     // 当前运行模式
     runEnv: 'dev',
@@ -27,7 +27,7 @@ var path = require('path');exports.default =
 
     // 模板引擎相关配置
     view: {
-        root: path.join(__dirname, '../template'),
+        root: _path2.default.join(__dirname, '../../src/template'),
         pagedir: 'page',
         //layout: 'layout',
         viewExt: 'html',

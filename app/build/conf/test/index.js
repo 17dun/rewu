@@ -1,11 +1,11 @@
-'use strict'; /**
-               * @file config.js
-               * @desc 测试环境配置
-               * @author xiaoguang01
-               * @date 2015/9/25
-               */
-var path = require('path');
-module.exports = {
+'use strict';Object.defineProperty(exports, "__esModule", { value: true }); /**
+                                                                             * @file config.js
+                                                                             * @desc 测试环境配置
+                                                                             * @author xiaoguang01
+                                                                             * @date 2015/9/25
+                                                                             */
+var path = require('path');exports.default =
+{
 	// 当前运行模式
 	runEnv: 'test',
 

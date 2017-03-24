@@ -5,7 +5,7 @@
  * @date 2015/9/25
  */
 var path = require('path');
-module.exports = {
+export default {
 	// 当前运行模式
 	runEnv: 'test',
 

@@ -6,7 +6,7 @@
  */
 import config from './conf';
 var koa = require('koa');
-var view = require('./libs/template');
+import view from './libs/template';
 var router = require('./router.js');
 var route = require('koa-router')();
 var app = koa();
@@ -29,7 +29,6 @@ app.use(function *(next) {
         yield next;
     }
 })
-
 
 // 设置模板
 view(app, config.view);

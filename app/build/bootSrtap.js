@@ -4,14 +4,14 @@
 
 
 
-var _conf = require('./conf');var _conf2 = _interopRequireDefault(_conf);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var koa = require('koa'); /**
-                           * @file bootStrap.js
-                           * @desc 程序入口
-                           * @author xiaoguang01
-                           * @date 2015/9/25
-                           */var view = require('./libs/template');var router = require('./router.js');var route = require('koa-router')();var app = koa();var fs = require('fs');
-var runEnv = _conf2.default.runEnv;
+var _conf = require('./conf');var _conf2 = _interopRequireDefault(_conf);
+
+var _template = require('./libs/template');var _template2 = _interopRequireDefault(_template);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var koa = require('koa'); /**
+                                                                                                                                                                                                                      * @file bootStrap.js
+                                                                                                                                                                                                                      * @desc 程序入口
+                                                                                                                                                                                                                      * @author xiaoguang01
+                                                                                                                                                                                                                      * @date 2015/9/25
+                                                                                                                                                                                                                      */var router = require('./router.js');var route = require('koa-router')();var app = koa();var fs = require('fs');var runEnv = _conf2.default.runEnv;
 var bodyParser = require('koa-bodyparser');
 var tclog = require('./libs/tclog.js');
 var genLogid = require('./libs/logid').genLogid;
@@ -30,9 +30,8 @@ app.use(_regenerator2.default.mark(function _callee(next) {return _regenerator2.
 
 
 
-
 // 设置模板
-view(app, _conf2.default.view);
+(0, _template2.default)(app, _conf2.default.view);
 
 app.context.xrender = ua.renderByUa;
 // 设置api

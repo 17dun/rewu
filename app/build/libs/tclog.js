@@ -1,18 +1,18 @@
-'use strict';var _typeof2 = require('babel-runtime/helpers/typeof');var _typeof3 = _interopRequireDefault(_typeof2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
-                                                                                                                                                                                                                   * @file tclog.js
-                                                                                                                                                                                                                   * @desc log日志打印
-                                                                                                                                                                                                                   * @author xiaoguang01
-                                                                                                                                                                                                                   * @date 2015/10/1
-                                                                                                                                                                                                                   */
+'use strict';var _typeof2 = require('babel-runtime/helpers/typeof');var _typeof3 = _interopRequireDefault(_typeof2);
 
-var tclog = {};
-var logConf = require('../conf/index.js').log;
-var fs = require('fs');
-var chalk = require('chalk');
-var inspect = require('util').inspect;
 
-tclog.logTemplate = '%s: pid::%s %d-%d-%d %d:%d:%d %s\n';
-tclog.conf = logConf;
+
+
+
+
+
+var _index = require('../conf/index.js');var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                                     * @file tclog.js
+                                                                                                                                                                                     * @desc log日志打印
+                                                                                                                                                                                     * @author xiaoguang01
+                                                                                                                                                                                     * @date 2015/10/1
+                                                                                                                                                                                     */var tclog = {};var fs = require('fs');var chalk = require('chalk');var inspect = require('util').inspect;tclog.logTemplate = '%s: pid::%s %d-%d-%d %d:%d:%d %s\n';
+tclog.conf = _index2.default.log;
 tclog.prefix = {
     debug: 'DEBUG',
     trace: 'TRACE',

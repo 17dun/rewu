@@ -1,5 +1,6 @@
-'use strict';var MongoClient = require('mongodb').MongoClient;
-var DB_CONN_STR = require('../conf').db;
+'use strict';
+var _conf = require('../conf');var _conf2 = _interopRequireDefault(_conf);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var MongoClient = require('mongodb').MongoClient;
+var DB_CONN_STR = _conf2.default.db;
 var ObjectId = require('mongodb').ObjectID;
 module.exports = {
     list: function list(start) {

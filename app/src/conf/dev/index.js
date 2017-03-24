@@ -5,7 +5,7 @@
  * @date 2015/9/25
  */
 "use strict";
-var path = require('path');
+import path from 'path';
 export default {
     // 当前运行模式
     runEnv: 'dev',
@@ -27,7 +27,7 @@ export default {
 
     // 模板引擎相关配置
     view: {
-        root: path.join(__dirname, '../template'),
+        root: path.join(__dirname, '../../src/template'),
         pagedir: 'page',
         //layout: 'layout',
         viewExt: 'html',

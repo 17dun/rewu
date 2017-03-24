@@ -33,9 +33,9 @@ gulp.task('watch',() => {
         './pid',
         'app/template/**/*.*',
         'client/src/!photo/*.*'
-    ], (event) => {
+    ], ['babel', (event) => {
         gulp.src('').pipe(livereload());
-    })
+    }])
 });
 
 gulp.task('open', () => {
@@ -57,13 +57,22 @@ gulp.task('ci', () => {
 })
 
 
-gulp.task('start', () => {
-    gulp.src('./app/src/conf/dev/index.js')
-        .pipe(gulp.dest('./app/src/conf'));
-    del('./app/build');
-    gulp.src('./app/src/**/*.js')
+gulp.task('babel', ['clean'], () => {
+  return gulp.src('./app/src/**/*.js')
         .pipe(bable())
         .pipe(gulp.dest('./app/build'));
+})
+
+gulp.task('clean', ['conf'], () => {
+    return del('./app/build');
+})
+
+gulp.task('conf', () => {
+  return gulp.src('./app/src/conf/dev/index.js')
+        .pipe(gulp.dest('./app/src/conf'));
+})
+
+gulp.task('start', ['babel'], () => {
     nodemon({
         script: './app/build/bootSrtap.js',
         ext: 'js',
@@ -74,7 +83,8 @@ gulp.task('start', () => {
             '--color'
         ],
         ignore: [
-            'conf/index.js'
+            'app/src/conf/index.js',
+            'app/build'
         ]
     });
 });
@@ -86,6 +96,9 @@ gulp.task('deploy', () => {
     spawnSync('pm2',['stop', 'app/bootSrtap.js']);
     spawnSync('pm2',['start', 'app/bootSrtap.js']);
 });
+
+
+
 
 gulp.task('build', () => {
     // 移动端js

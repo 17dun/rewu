@@ -6,13 +6,13 @@
  */
 
 var tclog = {};
-var logConf = require('../conf/index.js').log;
+import conf from '../conf/index.js';
 var fs = require('fs');
 var chalk = require('chalk');
 var inspect = require('util').inspect;
 
 tclog.logTemplate = '%s: pid::%s %d-%d-%d %d:%d:%d %s\n';
-tclog.conf = logConf;
+tclog.conf = conf.log;
 tclog.prefix = {
     debug: 'DEBUG',
     trace: 'TRACE',

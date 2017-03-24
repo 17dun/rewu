@@ -6,7 +6,7 @@
  */
 "use strict";
 var path = require('path');
-module.exports = {
+export default {
 	// 当前运行模式
 	runEnv: 'online',
 
