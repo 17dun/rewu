@@ -17,6 +17,7 @@ import gulpSequence from 'gulp-sequence';
 import {spawnSync} from 'child_process';
 import bable from 'gulp-babel';
 import del from 'del';
+import webpack from 'gulp-webpack';
 
 
 const paths = {
@@ -31,7 +32,7 @@ gulp.task('watch',() => {
     livereload.listen(8002);
     gulp.watch([
         './pid',
-        'app/template/**/*.*',
+        'server/template/**/*.*',
         'client/src/!photo/*.*'
     ], ['babel', (event) => {
         gulp.src('').pipe(livereload());
@@ -58,23 +59,23 @@ gulp.task('ci', () => {
 
 
 gulp.task('babel', ['clean'], () => {
-  return gulp.src('./app/src/**/*.js')
+  return gulp.src('./server/src/**/*.js')
         .pipe(bable())
-        .pipe(gulp.dest('./app/build'));
+        .pipe(gulp.dest('./server/dist'));
 })
 
 gulp.task('clean', ['conf'], () => {
-    return del('./app/build');
+    return del('./server/dist');
 })
 
 gulp.task('conf', () => {
-  return gulp.src('./app/src/conf/dev/index.js')
-        .pipe(gulp.dest('./app/src/conf'));
+  return gulp.src('./server/src/conf/dev/index.js')
+        .pipe(gulp.dest('./server/src/conf'));
 })
 
 gulp.task('start', ['babel'], () => {
     nodemon({
-        script: './app/build/bootSrtap.js',
+        script: './server/dist/bootSrtap.js',
         ext: 'js',
         execMap: {
             js: 'node --harmony'
@@ -83,8 +84,8 @@ gulp.task('start', ['babel'], () => {
             '--color'
         ],
         ignore: [
-            'app/src/conf/index.js',
-            'app/build'
+            'server/src/conf/index.js',
+            'server/dist'
         ]
     });
 });
@@ -93,13 +94,12 @@ gulp.task('start', ['babel'], () => {
 gulp.task('deploy', () => {
     gulp.src('conf/online/index.js')
         .pipe(gulp.dest('conf'));
-    spawnSync('pm2',['stop', 'app/bootSrtap.js']);
-    spawnSync('pm2',['start', 'app/bootSrtap.js']);
+    spawnSync('pm2',['stop', 'server/bootSrtap.js']);
+    spawnSync('pm2',['start', 'server/bootSrtap.js']);
 });
 
 
-
-
+//=================client端===============//
 gulp.task('build', () => {
     // 移动端js
     let jsArr = [];
@@ -117,7 +117,7 @@ gulp.task('build', () => {
 
     gulp.src(jsArr).pipe(concat('bundle.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('client/build/js/'));
+        .pipe(gulp.dest('client/dist/js/'));
 
 
     //pc合并
@@ -137,38 +137,42 @@ gulp.task('build', () => {
 
     gulp.src(pcJsArr).pipe(concat('pc-bundle.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('client/build/js/'));
+        .pipe(gulp.dest('client/dist/js/'));
 
 
     // page部分的压缩合并
     gulp.src('client/src/js/page/**/*.js')
         .pipe(gulp.dest('client/src/js/page'))
         .pipe(uglify())
-        .pipe(gulp.dest('client/build/js/page'))
+        .pipe(gulp.dest('client/dist/js/page'))
 
     // //压缩编译cess
     gulp.src(['client/src/css/**/*.css'])
     	.pipe(less())
         .pipe(minifyCss())
-        .pipe(gulp.dest('client/build/css/'));
+        .pipe(gulp.dest('client/dist/css/'));
 
     //压缩编译less
     gulp.src(['client/src/less/common.less'])
         .pipe(less())
         .pipe(minifyCss())
         .pipe(concat('pc-bundle.css'))
-        .pipe(gulp.dest('client/build/css/'));
+        .pipe(gulp.dest('client/dist/css/'));
 
 
     // 拷贝图片
     gulp.src('client/src/img/*.{png,jpg,jpeg}')
-        .pipe(gulp.dest('client/build/img'));
+        .pipe(gulp.dest('client/dist/img'));
 
     // 拷贝iconfont文件
     gulp.src('client/src/font/*.{ttf,woff,eot,svg}')
-        .pipe(gulp.dest('client/build/font'));
+        .pipe(gulp.dest('client/dist/font'));
 
 });
+
+//=================client端===============//
+
+
 
 // livereload
 gulp.task('reload', () => {
@@ -188,5 +192,5 @@ gulp.task('online', gulpSequence('build', 'deploy'));
 
 //下线
 gulp.task('offline', () => {
-    spawnSync('pm2', ['stop', 'app/bootSrtap.js']);
+    spawnSync('pm2', ['stop', 'server/bootSrtap.js']);
 });

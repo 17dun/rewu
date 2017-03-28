@@ -3,4 +3,5 @@ log
 pid
 .idea
 client/build
-conf/index.js
+server/build
+server/conf/index.js
