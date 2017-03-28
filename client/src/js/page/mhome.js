@@ -1,13 +1,13 @@
-zeus.page({
-    initDatas: function () {
+'use strict';zeus.page({
+    initDatas: function initDatas() {
         self.list = [];
     },
     // 初始化部件
-    initParts: function () {
+    initParts: function initParts() {
         var self = this;
         self.setPic();
     },
-    bindEvent: function () {
+    bindEvent: function bindEvent() {
         $(window).scroll(function () {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 self.getNewList();
@@ -24,7 +24,7 @@ zeus.page({
     },
 
     // 图片延迟加载
-    setPic: function () {
+    setPic: function setPic() {
         var $pics = $('.load-pic');
         for (var i = 0; i < $pics.length; i++) {
             var $item = $($pics[i]);
@@ -34,16 +34,15 @@ zeus.page({
         }
     },
 
-    getNewList: function () {
+    getNewList: function getNewList() {
         var start = $('#infiniteList .channel-item').length / 50;
         $.ajax({
             url: '/home/list?start=' + start,
             type: 'GET',
             dataType: 'json',
-            success: function (rt) {
+            success: function success(rt) {
                 $('#listTemp').renderAppend(rt.data).appendTo('#infiniteList').show();
                 self.setPic();
-            }
-        });
-    }
-});
+            } });
+
+    } });

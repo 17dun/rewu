@@ -135,13 +135,16 @@ gulp.task('build', () => {
         }
     });
 
-    gulp.src(pcJsArr).pipe(concat('pc-bundle.js'))
+    gulp.src(pcJsArr)
+        .pipe(bable())
+        .pipe(concat('pc-bundle.js'))
         .pipe(uglify())
         .pipe(gulp.dest('client/dist/js/'));
 
 
     // page部分的压缩合并
     gulp.src('client/src/js/page/**/*.js')
+        .pipe(bable())
         .pipe(gulp.dest('client/src/js/page'))
         .pipe(uglify())
         .pipe(gulp.dest('client/dist/js/page'))
