@@ -5,7 +5,8 @@
  * @date 2016/3/7
  */
 var MongoClient = require('mongodb').MongoClient;
-var DB_CONN_STR = require('../conf').db;
+import conf from '../conf';
+const DB_CONN_STR = conf.db;
 var ObjectId =  require('mongodb').ObjectID;
 var channelList = require('../conf').channel;
 module.exports = {
