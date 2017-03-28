@@ -91,7 +91,7 @@ gulp.task('start', ['babel'], () => {
 });
 
 
-gulp.task('deploy', () => {
+gulp.task('deploy', ['build'], () => {
     spawnSync('pm2',['stop', 'server/dist/bootSrtap.js']);
     spawnSync('pm2',['start', 'server/dist/bootSrtap.js']);
 });
@@ -100,7 +100,7 @@ gulp.task('deploy', () => {
 //=================client端===============//
 gulp.task('build',['babel'], () => {
 
-    gulp.src('server/dist/conf/online/index.js')
+   return gulp.src('server/dist/conf/online/index.js')
         .pipe(gulp.dest('server/dist/conf'));
     // 移动端js
     let jsArr = [];
@@ -192,7 +192,7 @@ gulp.task('dev', gulpSequence(
 ));
 
 //上线
-gulp.task('online', gulpSequence('build', 'deploy'));
+//gulp.task('online', gulpSequence('build', 'deploy'));
 
 //下线
 gulp.task('offline', () => {
