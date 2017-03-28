@@ -100,7 +100,7 @@ gulp.task('deploy', () => {
 
 
 //=================client端===============//
-gulp.task('build', () => {
+gulp.task('build',['babel'], () => {
     // 移动端js
     let jsArr = [];
     let data = fs.readFileSync('client/src/js/online.js', 'utf8');
