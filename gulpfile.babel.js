@@ -94,8 +94,8 @@ gulp.task('start', ['babel'], () => {
 gulp.task('deploy', () => {
     gulp.src('conf/online/index.js')
         .pipe(gulp.dest('conf'));
-    spawnSync('pm2',['stop', 'server/bootSrtap.js']);
-    spawnSync('pm2',['start', 'server/bootSrtap.js']);
+    spawnSync('pm2',['stop', 'server/dist/bootSrtap.js']);
+    spawnSync('pm2',['start', 'server/dist/bootSrtap.js']);
 });
 
 
@@ -195,5 +195,5 @@ gulp.task('online', gulpSequence('build', 'deploy'));
 
 //下线
 gulp.task('offline', () => {
-    spawnSync('pm2', ['stop', 'server/bootSrtap.js']);
+    spawnSync('pm2', ['stop', 'server/dist/bootSrtap.js']);
 });
