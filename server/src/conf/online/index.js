@@ -17,7 +17,7 @@ export default {
 
     statics: {
         basePath: 'http://127.0.0.1/client/',
-        staticRoute: 'client/src'
+        staticRoute: 'client/dist'
     },
 
     // 文本宏
