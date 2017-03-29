@@ -100,9 +100,10 @@ gulp.task('deploy', ['build'], () => {
 
 //=================client端===============//
 gulp.task('build',['babel'], () => {
-
-   return gulp.src('server/dist/conf/online/index.js')
+   
+    gulp.src('server/dist/conf/online/index.js')
         .pipe(gulp.dest('server/dist/conf'));
+         
     // 移动端js
     let jsArr = [];
     let data = fs.readFileSync('client/src/js/online.js', 'utf8');
@@ -170,7 +171,7 @@ gulp.task('build',['babel'], () => {
         .pipe(gulp.dest('client/dist/img'));
 
     // 拷贝iconfont文件
-    gulp.src('client/src/font/*.{ttf,woff,eot,svg}')
+   return gulp.src('client/src/font/*.{ttf,woff,eot,svg}')
         .pipe(gulp.dest('client/dist/font'));
 
 });
