@@ -85,7 +85,8 @@ gulp.task('start', ['babel'], () => {
         ],
         ignore: [
             'server/src/conf/index.js',
-            'server/dist'
+            'server/dist',
+            'bin'
         ]
     });
 });

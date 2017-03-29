@@ -8,7 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 import conf from '../conf';
 const DB_CONN_STR = conf.db;
 var ObjectId =  require('mongodb').ObjectID;
-var channelList = require('../conf').channel;
+const channelList =  conf.channel;
 module.exports = {
 
     reList: function(data){
@@ -101,10 +101,9 @@ module.exports = {
     list: function(data){
         var self = this;
         var pageSize = data.pageSize*1 || 100;
+        var from1 = 0;
         if(data.pageNum){
-            from = (data.pageNum - 1) * data.pageSize;
-        }else{
-            from = 0;
+            from1 = (data.pageNum - 1) * data.pageSize;
         }
         var find = {};
         if(data.vdName){
@@ -125,7 +124,7 @@ module.exports = {
         return new Promise(function (resovel, reject) {
             MongoClient.connect(DB_CONN_STR, function(err, db){
                 var collection = db.collection('vds');
-                collection.find(find).skip(from).limit(pageSize).sort({_id:-1}).toArray(function(err, rt){
+                collection.find(find).skip(from1).limit(pageSize).sort({_id:-1}).toArray(function(err, rt){
                     if(err){
                         resovel({
                             code: 1,

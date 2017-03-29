@@ -4,7 +4,7 @@ var importNum = 0;
 var allNum = 0;
 var fileNum = 0;
 
-var dir = '20170318';
+var dir = '20170329';
 var startIndex = 1;
 var endIndex = 30;
 
