@@ -155,7 +155,7 @@ gulp.task('build',['babel'], () => {
     	.pipe(less())
         .pipe(minifyCss())
         .pipe(gulp.dest('client/dist/css/'));
-
+ 
     //压缩编译less
     gulp.src(['client/src/less/common.less'])
         .pipe(less())

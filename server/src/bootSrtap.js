@@ -5,11 +5,11 @@
  * @date 2015/9/25
  */
 import config from './conf';
-var koa = require('koa');
+const Koa = require('koa');
+const app = new Koa();
 import view from './libs/template';
 var router = require('./router.js');
 var route = require('koa-router')();
-var app = koa();
 var fs = require('fs');
 var runEnv = config.runEnv;
 var bodyParser = require('koa-bodyparser');
@@ -18,9 +18,13 @@ var genLogid = require('./libs/logid').genLogid;
 var api = require('./libs/api');
 var ua = require('./libs/ua');
 var gzip = require('koa-gzip');
+const convert = require('koa-convert');
 
-app.keys = ['tiancai', 'xiaoguang'];
-app.use(gzip());
+const session = require('koa-session');
+app.keys = ['xiaoguangrewu'];
+app.use(convert(session({}, app)));
+
+app.use(convert(gzip()));
 
 app.use(function *(next) {
     if(this.url == '/favicon.ico'){
@@ -36,8 +40,8 @@ view(app, config.view);
 app.context.xrender = ua.renderByUa;
 // 设置api
 api(app);
-app.use(require('koa-static')(config.statics.staticRoute));
-app.use(bodyParser());
+app.use(convert(require('koa-static')(config.statics.staticRoute)));
+app.use(convert(bodyParser()));
 tclog.init();
 // live-reload代理中间件
 if (runEnv === 'dev') {

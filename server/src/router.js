@@ -6,6 +6,7 @@
  */
 var router = require('koa-router')();
 var ctrs = [];
+const convert = require('koa-convert');
 function getC(app) {
     return new Promise(function (resovel, reject) {
         try {
@@ -19,7 +20,7 @@ function getC(app) {
 }
 
 function set(app) {
-    app.use(router.routes());
+    app.use(convert(router.routes()));
     getC(app).then(function (ctrs) {
         setMap(ctrs);
     }).catch(function (e) {
