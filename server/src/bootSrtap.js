@@ -20,6 +20,7 @@ var ua = require('./libs/ua');
 var gzip = require('koa-gzip');
 const convert = require('koa-convert');
 
+
 const session = require('koa-session');
 app.keys = ['xiaoguangrewu'];
 app.use(convert(session({}, app)));
